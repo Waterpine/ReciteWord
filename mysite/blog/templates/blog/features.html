@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+{% load staticfiles %}
+<head>
+    <title>单词斩</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <!---<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'> 
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>--->
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/flexslider/flexslider.css' %}">
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head> 
+
+<body class="features-page">    
+    <!-- ******HEADER****** --> 
+    <header id="header" class="header navbar-fixed-top">  
+        <div class="container">       
+            <h1 class="logo">
+                <a href="index.html"><span class="text">单词斩</span></a>
+            </h1><!--//logo-->
+            <nav class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active nav-item"><a href="{% url 'blog:' %}">主页</a></li>
+                        <li class="nav-item"><a href="{% url 'blog:features' %}">背单词</a></li>
+                        <li class="nav-item"><a href="{% url 'blog:pricing'%}">考试</a></li>
+                        <li class="nav-item"><a href="{% url 'blog:review'%}">复习</a></li>
+                        <li class="nav-item"><a href="{% url 'blog:note'%}">单词本</a></li>
+                        <li class="nav-item"><a href="#">你好！学习者</a></li>
+                        <li class="nav-item"><a href="{% url 'blog:' %}">登出</a></li>
+                        <!--<li class="nav-item"><a href="{% url 'blog:login'%}">登陆</a></li>-->
+                        <!--<li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="{% url 'blog:signup'%}">免费注册</a></li>-->
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->                     
+        </div><!--//container-->
+    </header><!--//header-->
+    
+    <div class="headline-bg">
+    </div><!--//headline-bg-->         
+    
+    <!-- ******Video Section****** --> 
+    <section class="features-video section section-on-bg">
+        <div class="container text-center">          
+            <h2 class="title">加油！开始新的一天的学习</h2>
+        </div><!--//container-->
+    </section><!--//feature-video-->
+
+    <!-- ******Steps Section****** --> 
+    <section class="steps section">
+        <div class="container">
+            <h2 class="title text-center">3 Simple Steps to Get you started with Velocity</h2>
+            <div class="row">
+                 <div class="step text-center col-xs-12 col-sm-4">
+                     <h3 class="title"><span class="number">1</span><br /><span class="text">四级单词</span></h3>
+                     <p>  学习进度如下:</p>
+                     <h2>{{user.number_four}}/{{four_count}}</h2>
+                 </div><!--//step-->
+                 <div class="step text-center col-xs-12 col-sm-4">
+                     <h3 class="title"><span class="number">2</span><br /><span class="text">六级单词</span></h3>
+                     <p>  学习进度如下:</p>
+                     <h2>{{user.number_six}}/{{six_count}}</h2>
+                 </div><!--//step-->
+                 <div class="step text-center col-xs-12 col-sm-4">
+                     <h3 class="title"><span class="number">3</span><br /><span class="text">托福单词</span></h3>
+                     <p>  学习进度如下:</p>
+                     <h2>{{user.number_toefl}}/{{toefl_count}}</h2>
+                 </div><!--//step-->
+            <!--</div>&lt;!&ndash;//row&ndash;&gt;-->
+            <!--<div class="row">-->
+                <div class="step text-center col-xs-12 col-sm-4">
+                    <form action="{% url 'blog:study' %}" method="post">
+                        <input type="hidden" name="start_id" value="{{user.number_four}}"/></p>
+                        <!--<input type="hidden" name="now_id" value="{{user.number_four}}"/></p>-->
+                        <!--<input type="hidden" name="next_id" value="{{user.number_four}}"/></p>-->
+                        <!--<input type="submit" value="开始学习"/>-->
+                        <button type="submit" class="btn btn-block btn-cta-primary">开始学习</button>
+                        {% csrf_token %}
+                    </form>
+                </div>
+                <div class="step text-center col-xs-12 col-sm-4">
+                    <form action="{% url 'blog:study_six' %}" method="post">
+                        <input type="hidden" name="start_id" value="{{user.number_six}}"/></p>
+                        <!--<input type="hidden" name="now_id" value="{{user.number_six}}"/></p>-->
+                        <!--<input type="hidden" name="next_id" value="{{user.number_six}}"/></p>-->
+                        <!--<input type="submit" value="开始学习"/>-->
+                        <button type="submit" class="btn btn-block btn-cta-primary">开始学习</button>
+                        {% csrf_token %}
+                    </form>
+                </div>
+                <div class="step text-center col-xs-12 col-sm-4">
+                    <form action="{% url 'blog:study_toefl' %}" method="post">
+                        <input type="hidden" name="start_id" value="{{user.number_toefl}}"/></p>
+                        <!--<input type="hidden" name="now_id" value="{{user.number_toefl}}"/></p>-->
+                        <!--<input type="hidden" name="next_id" value="{{user.number_toefl}}"/></p>-->
+                        <!--<input type="submit" value="开始学习"/>-->
+                        <button type="submit" class="btn btn-block btn-cta-primary">开始学习</button>
+                        {% csrf_token %}
+                    </form>
+                </div>
+                <!--<div class="step text-center col-xs-12 col-sm-4"><a class="btn btn-cta btn-cta-primary" href="{% url 'blog:study' %}">开始学习</a></div>-->
+                <!--<div class="step text-center col-xs-12 col-sm-4"><a class="btn btn-cta btn-cta-primary" href="{% url 'blog:study_six' %}">开始学习</a></div>-->
+                <!--<div class="step text-center col-xs-12 col-sm-4"><a class="btn btn-cta btn-cta-primary" href="{% url 'blog:study_toefl' %}">开始学习</a></div>-->
+            </div>
+            <!--<div class="text-center"><a class="btn btn-cta btn-cta-primary" href="signup.html">Get Started - It's Free</a></div>-->
+        </div><!--//container-->        
+    </section><!--//steps-->
+    
+    <!-- ******FOOTER****** --> 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="row">                    
+                    <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-col-inner">
+                            <h3 class="title">关于我们</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-caret-right"></i>我们是谁</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>地址</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>博客</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>工作</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>联系我们</a></li>
+                            </ul>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//foooter-col-->
+                    <div class="footer-col links col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-col-inner">
+                            <h3 class="title">产品</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-caret-right"></i>如何工作的</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>API</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>下载APP</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>价格</a></li>
+                            </ul>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//foooter-col-->
+                    <div class="footer-col links col-md-2 col-sm-4 col-xs-12 sm-break">
+                        <div class="footer-col-inner">
+                            <h3 class="title">支持</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#"><i class="fa fa-caret-right"></i>帮助</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>文档</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>服务</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i>隐私</a></li>
+                            </ul>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//foooter-col-->
+                    <div class="footer-col connect col-xs-12 col-md-6">
+                        <div class="footer-col-inner">
+                            <ul class="social list-inline">
+                                <li><a href="" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li class="row-end"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                            <div class="form-container">
+                                <p class="intro">持续关注单词斩的最新动态</p>
+                                <form class="signup-form navbar-form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Enter your email address">
+                                    </div>
+                                    <button type="submit" class="btn btn-cta btn-cta-primary">立即提交</button>
+                                </form>
+                            </div><!--//subscription-form-->
+                        </div><!--//footer-col-inner-->
+                    </div><!--//foooter-col-->
+                    <div class="clearfix"></div>
+                </div><!--//row-->
+                <div class="row has-divider">
+                    <div class="footer-col download col-xs-12 col-md-6">
+                        <div class="footer-col-inner">
+                            <h3 class="title">移动端apps</h3>
+                            <ul class="list-unstyled download-list">
+                                <li><a class="btn btn-ghost" href="#"><i class="fa fa-apple"></i><span class="text">iOS版本下载</span> </a></li>
+                                <li><a class="btn btn-ghost" href="#"><i class="fa fa-android"></i><span class="text">Android版本下载</span></a></li>
+                                <li><a class="btn btn-ghost" href="#"><i class="fa fa-windows"></i><span class="text">Windows版本即将到来</span></a></li>
+                            </ul>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//download-->
+                    <div class="footer-col contact col-xs-12 col-md-6">
+                        <div class="footer-col-inner">
+                            <h3 class="title">联系我们</h3>
+                            <p class="adr clearfix">
+                                <i class="fa fa-map-marker pull-left"></i>
+                                <span class="adr-group pull-left">
+                                    <span class="street-address">浙江大学</span><br>
+                                    <span class="region">玉泉校区</span><br>
+                                    <span class="postal-code">计算机科学与技术学院</span><br>
+                                    <span class="country-name">中国</span>
+                                </span>
+                            </p>
+                            <p class="tel"><i class="fa fa-phone"></i>+86-571-87953025</p>
+                            <p class="email"><i class="fa fa-envelope-o"></i><a href="#">enquires@website.com</a></p>
+                        </div><!--//footer-col-inner-->
+                    </div><!--//contact-->
+                </div>
+            </div><!--//container-->
+        </div><!--//footer-content-->
+    </footer><!--//footer-->
+ 
+    <!-- Javascript -->
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'plugins/bootstrap-hover-dropdown.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'plugins/back-to-top.js'%}"></script>
+    <script type="text/javascript" src="{% static 'plugins/jquery-placeholder/jquery.placeholder.js'%}"></script>
+    <script type="text/javascript" src="{% static 'plugins/FitVids/jquery.fitvids.js'%}"></script>
+    <script type="text/javascript" src="{% static 'plugins/flexslider/jquery.flexslider-min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+</body>
+</html> 
+
+
